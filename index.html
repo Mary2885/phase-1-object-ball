@@ -1,16 +1,54 @@
-function numPointsScored(playerName) {
-  let game = gameObject();
-  for (let teamKey in game) {
-    let teamObj = game[teamKey];
-    for (let player in teamObj.players) {
-      if (player === playerName) {
-        return teamObj.players[player].points;
-      }
-    }
-  }
-  return "Player not found";
+const players = () => {
+  const game = gameObject();
+  return { ...game.home.players, ...game.away.players };
 }
 
-// Test the function
-console.log(numPointsScored("Alan Anderson")); // 22
-console.log(numPointsScored("Bismak Biyombo")); // 12
+const numPointsScored = (player) => {
+  return players()[player].points;
+}
+
+const shoeSize = (player) => {
+  return players()[player].shoe;
+}
+
+const teamColors = (team) => {
+  const game = gameObject();
+  for (let team in game) {
+    if (game[team].teamName === team) return game[team].colors;
+  }
+}
+
+const teamNames = (game) => {
+  return `Home team : ${game.home.teamName} vs Away team : ${game.away.teamName}`;
+}
+
+const playersNumbers = (team) => {
+  const game = gameObject();
+  const homePlayers = game.home.players;
+  const awayPlayers = game.away.players;
+  const jerseys = [];
+  if (game.home.teamName === team) {
+    for (const player in homePlayers) jerseys.push(homePlayers[player].number);
+  } else {
+    for (const player in awayPlayers) jerseys.push(awayPlayers[player].number);
+  }
+  return jerseys;
+}
+
+const playerStats = (player) => {
+  return players()[player];
+}
+
+const bigShoeRebounds = () => {
+  let largestShoeSize = 0;
+  let playerWithLargestShoe;
+  for (const player in players()) {
+    if (largestShoeSize players()[player].shoe) {
+      largestShoeSize = players()[player].shoe;
+      playerWithLargestShoe = player;
+    }
+  }
+  return `Rebounds for player ${playerWithLargestShoe} that has big a shoe number are ${
+    players()[playerWithLargestShoe].rebounds
+  }`;
+}
