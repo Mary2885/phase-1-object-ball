@@ -1,9 +1,16 @@
-<h1>JavaScript Objectball</h1>
-<p>
-  Open your Chrome dev tools to see console output and trigger the debugger to
-  catch.
-</p>
+function numPointsScored(playerName) {
+  let game = gameObject();
+  for (let teamKey in game) {
+    let teamObj = game[teamKey];
+    for (let player in teamObj.players) {
+      if (player === playerName) {
+        return teamObj.players[player].points;
+      }
+    }
+  }
+  return "Player not found";
+}
 
-<script src="./src/00-objectball.js"></script>
-<script src="./src/01-simple-debug.js"></script>
-<!-- <script src="./src/02-advanced-debug.js"></script> -->
+// Test the function
+console.log(numPointsScored("Alan Anderson")); // 22
+console.log(numPointsScored("Bismak Biyombo")); // 12
